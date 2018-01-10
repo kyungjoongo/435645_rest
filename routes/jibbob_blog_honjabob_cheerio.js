@@ -8,7 +8,7 @@ var mergeJSON = require("merge-json");
 
 /*requestPromise("http://www.roadrunnersports.com/rrs/mensshoes/mensshoesrunning/?p=96", function (error, response, body) {*/
 
-var str = '집밥 백선생 레시피 모음'
+var str = '혼밥 레시피 모음'
 var qs = require('querystring');
 
 var encodedStr = qs.escape(str);
