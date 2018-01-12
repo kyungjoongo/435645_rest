@@ -15,7 +15,6 @@ router.get('/r_list', function (req, _response, next) {
 
     var str = receipeName
     var qs = require('querystring');
-
     var encodedStr = qs.escape(str);
 
 
