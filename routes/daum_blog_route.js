@@ -9,6 +9,8 @@ var querystring = require('querystring');
 
 router.get('/blog_list', function (req, _response, next) {
 
+
+
     var page = req.query.page;
     var query = req.query.query
 
