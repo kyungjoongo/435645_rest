@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var daum_blog_route = require('./routes/daum_blog_route');
 var ufc_route = require('./routes/ufc_route');
 var jibbob_route = require('./routes/jibbob_route');
 var cors = require('cors')
@@ -33,6 +34,8 @@ app.use('/', users);
 app.use('/', ufc_route);
 //jibbob_route
 app.use('/', jibbob_route);
+
+app.use('/', daum_blog_route);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
