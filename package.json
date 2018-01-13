@@ -6,21 +6,32 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "~1.18.2",
     "cheerio": "^1.0.0-rc.2",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "~2.6.9",
+    "escape-html": "^1.0.3",
     "express": "~4.15.5",
     "hbs": "~4.0.1",
+    "icrawler": "^2.6.5",
     "json-beautify": "^1.0.1",
     "merge-json": "0.1.0-b.3",
     "morgan": "~1.9.0",
     "node-fetch": "^1.7.3",
+    "osmosis": "^1.1.6",
+    "phantomjs": "^2.1.7",
+    "prettyjson": "^1.2.1",
     "request": "^2.83.0",
     "request-json": "^0.6.2",
     "request-promise": "^4.2.2",
+    "request-sync": "^1.0.0",
+    "scrape-it": "^4.1.2",
     "serve-favicon": "~2.4.5",
-    "sync-request": "^4.1.0"
+    "striptags": "^3.1.1",
+    "sync": "^0.2.5",
+    "sync-request": "^4.1.0",
+    "then-request": "^4.1.0"
   }
 }
