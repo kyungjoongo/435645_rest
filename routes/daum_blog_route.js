@@ -6,7 +6,6 @@ var requestPromise = require('request-promise')
 var request = require('request');
 var syncRequest = require('sync-request');
 var querystring = require('querystring');
-var axios = require('axios');
 var striptags = require('striptags');
 var prettyjson = require('prettyjson');
 
@@ -156,29 +155,6 @@ router.get('/naver_blog', function (req, last_res, next) {
 
 });
 
-
-////////////////////////////
-router.get('/get_image', function (req, _response, next) {
-
-    var query = req.query.query
-    var encodedQuery = querystring.escape(query);
-
-    var instance = axios.create({
-        baseURL: 'https://dapi.kakao.com/v2/search/image?query=' + encodedQuery + '&page=1&size=10',
-        headers: {
-            'Authorization': 'KakaoAK 28449fe1535e7f4f2d0d605b5a1af7a6',
-            'Content-Type': 'application/json;charset=UTF-8'
-        },
-        responseType: 'json'
-    });
-
-    instance.get().then(responseJson=>{
-        console.log('##############'+ JSON.stringify(responseJson.data.documents[0].image_url));
-
-
-        _response.json(responseJson.data.documents);
-    });
-});
 
 
 router.get('/blog_list', function (req, _response, next) {
