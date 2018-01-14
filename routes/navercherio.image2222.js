@@ -9,7 +9,7 @@ var mergeJSON = require("merge-json");
 
 var querystring = require('querystring');
 
-var encodedQuery = querystring.escape('백종원 레시피');
+var encodedQuery = querystring.escape('임대주택 정보');
 
 var api_url = 'https://openapi.naver.com/v1/search/blog?query=' + encodedQuery; // json 결과
 

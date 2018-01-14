@@ -8,7 +8,7 @@ var mergeJSON = require("merge-json");
 
 /*requestPromise("http://www.roadrunnersports.com/rrs/mensshoes/mensshoesrunning/?p=96", function (error, response, body) {*/
 
-var str = '집밥 백선생 레시피 모음'
+var str = '임대주택 정보 모음'
 var qs = require('querystring');
 
 var encodedStr = qs.escape(str);
@@ -16,7 +16,7 @@ var encodedStr = qs.escape(str);
 
 var res = syncRequest('get', 'https://search.naver.com/search.naver?date_from=&date_option=0&date_to=&dup_remove=1&nso=&post_blogurl=&post_blogurl_without=' +
     '&sm=tab_pge&srchby=all&st=sim&where=post&query='+ encodedStr+
-    '&start='+ 11);
+    '&start='+ 1);
 
 
 
