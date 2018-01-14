@@ -56,11 +56,13 @@ router.get('/imde_info_list/', function (req, last_response, next) {
 
             var _date = year+"-"+ month+ "-"+  date;
 
-            blogArrray.items[i].title = title;
+            blogArrray.items[i].link = link;
             blogArrray.items[i].title = title;
             blogArrray.items[i].date = _date;
 
         }
+
+
 
 
         console.log(prettyjson.render(blogArrray.items ,{noColor: true}));
