@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var imde_route = require('./routes/imde_route');
 var daum_blog_route = require('./routes/daum_blog_route');
 var ufc_route = require('./routes/ufc_route');
 var jibbob_route = require('./routes/jibbob_route');
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/', users);
 app.use('/', ufc_route);
+app.use('/', imde_route);
 //jibbob_route
 app.use('/', jibbob_route);
 
