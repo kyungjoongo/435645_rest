@@ -12,17 +12,80 @@ var prettyjson = require('prettyjson');
 /*var encodedQuery = querystring.escape('강식당 레시피');*/
 
 
+router.get('/naver_news_list', function (req, last_response, next) {
+
+    var page = req.query.page;
+    var query = req.query.query;
+    var displaySize= 10;
+
+    if ( query== undefined){
+        query = '주택 청약 정보';
+    }
+
+    var start = (page-1) * displaySize + 1;
+
+
+    var querystring = require('querystring');
+    var encodedQuery = querystring.escape(query);
+    /**/
+
+    var api_url = 'https://openapi.naver.com/v1/search/news.json?display='+ displaySize+ '&start='+ start+ '&sort=date&query='+ encodedQuery; // json 결과
+    var striptags = require('striptags');
+    var prettyjson = require('prettyjson');
+
+
+    request({
+        url: api_url,
+        headers: {'X-Naver-Client-Id': 'e8G6hWbcN1XdeCN9DIgQ', 'X-Naver-Client-Secret': 'wCcRnTYrhN'},
+        method: 'GET'
+    }, function (err, _response, body) {
+        //it works!
+
+        var blogArrray= JSON.parse(body);
+
+
+        for ( var i=0; i<blogArrray.items.length;i++){
+
+
+            console.log('##############'+ striptags(blogArrray.items[i].title))
+
+            var title= striptags(blogArrray.items[i].title);
+
+            var link = blogArrray.items[i].link.replace('&amp;', '&')
+
+
+            blogArrray.items[i].title = title;
+            blogArrray.items[i].link = link;
+
+        }
+
+
+        /*console.log(prettyjson.render(blogArrray.items ,{noColor: true}));*/
+
+        last_response.json(blogArrray.items)
+
+    });
+
+});
+
+
+
 router.get('/imde_info_list/', function (req, last_response, next) {
 
     var page = req.query.page;
+    var query = req.query.query;
     var displaySize= 10;
+
+    if ( query== undefined){
+        query = '주택청약정보';
+    }
 
     var start = (page-1) * displaySize + 1;
 
     var blogArray =[];
 
     var querystring = require('querystring');
-    var encodedQuery = querystring.escape('임대주택 청약 정보');
+    var encodedQuery = querystring.escape(query);
     var api_url = 'https://openapi.naver.com/v1/search/blog?query='+ encodedQuery+ '&start='+ start+ '&display='+ displaySize+ '&sort=date'; // json 결과
     var striptags = require('striptags');
     var prettyjson = require('prettyjson');
