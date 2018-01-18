@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var bit_route = require('./routes/bit_route');
 var users = require('./routes/users');
 var imde_route = require('./routes/imde_route');
 var daum_blog_route = require('./routes/daum_blog_route');
@@ -36,6 +37,7 @@ app.use('/', ufc_route);
 app.use('/', imde_route);
 //jibbob_route
 app.use('/', jibbob_route);
+app.use('/', bit_route);
 
 app.use('/', daum_blog_route);
 
