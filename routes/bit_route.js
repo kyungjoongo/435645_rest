@@ -12,6 +12,52 @@ var prettyjson = require('prettyjson');
 /*var encodedQuery = querystring.escape('강식당 레시피');*/
 
 
+router.get('/bit_one/:bitname', function (req, last_response, next) {
+
+    var bitname = req.params.bitname;
+
+
+    request({
+
+        encoding: null,
+        uri: 'https://api.bithumb.com/public/ticker/'+ bitname,
+        method: 'GET'
+    }, function (err, res, body) {
+
+
+        var jsonArray = JSON.parse(body);
+
+        last_response.json({result : jsonArray.data});
+
+
+    });
+
+});
+
+
+router.get('/bit_all', function (req, last_response, next) {
+
+
+    request({
+
+        encoding: null,
+        uri: 'https://api.bithumb.com/public/ticker/ALL',
+        method: 'GET'
+    }, function (err, res, body) {
+
+
+        var jsonArray = JSON.parse(body);
+
+        last_response.json({result : jsonArray.data});
+
+
+    });
+
+});
+
+//###############################
+
+
 router.get('/bit_detail', function (req, last_response, next) {
 
     var bitname = req.query.bitname;
@@ -21,7 +67,6 @@ router.get('/bit_detail', function (req, last_response, next) {
     var res = syncRequest('GET', 'https://api.korbit.co.kr/v1/ticker/detailed?currency_pair=' + bitname);
     console.log('##############' + res.getBody());
     var result = JSON.parse(res.getBody());
-
 
 
     last_response.json({
@@ -44,28 +89,33 @@ router.get('/bit_list', function (req, last_response, next) {
 
     arr.push({
         name: '비트코인'
-        , sise: btc
+        , sise: btc.last
+        , timestamp: btc.timestamp
         , engname: 'btc'
     })
     arr.push({
         name: '이더리움'
-        , sise: eth
+        , sise: eth.last
+        , timestamp: eth.timestamp
         , engname: 'eth'
     })
 
     arr.push({
         name: '비트코인 캐시'
-        , sise: bch_krw
+        , sise: bch_krw.last
+        , timestamp: bch_krw.timestamp
         , engname: 'bch'
     })
     arr.push({
         name: '이더리움 클래식'
-        , sise: etc_krw
+        , sise: etc_krw.last
+        , timestamp: etc_krw.timestamp
         , engname: 'etc'
     })
     arr.push({
         name: '리플'
-        , sise: xrp_krw
+        , sise: xrp_krw.last
+        , timestamp: xrp_krw.timestamp
         , engname: 'xrp'
     })
 
@@ -88,9 +138,9 @@ function getBitCurrency(currecyName) {
     var res = syncRequest('GET', 'https://api.korbit.co.kr/v1/ticker?currency_pair=' + currecyName);
     console.log('##############' + res.getBody());
     var result = JSON.parse(res.getBody());
-    console.log('##############' + result.last);
+    console.log('##############' + result);
 
-    var result = result.last;
+    var result = result;
 
 
     return result;
