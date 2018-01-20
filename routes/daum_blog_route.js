@@ -170,7 +170,7 @@ router.get('/blog_list', function (req, _response, next) {
             , 'Content-Type': 'application/json;charset=UTF-8'
         },
         encoding: null,
-        uri: 'https://dapi.kakao.com/v2/search/blog?query=' + encodedQuery + '&page=' + page + '&size=20',
+        uri: 'https://dapi.kakao.com/v2/search/blog?sort=recency&query=' + encodedQuery + '&page=' + page + '&size=20',
         method: 'GET'
     }, function (err, res, body) {
         //it works!
