@@ -471,7 +471,8 @@ router.get('/coinone_bithumb_list/', function (req, last_response, next) {
 
     temp1 = make_bithumb_currency_list();
     temp2 = make_coinone_currency_list();
-    //temp3 = make_corbit_currency_list();
+    temp3 = make_corbit_currency_list();
+
 
     temp1.push(...temp2);
 
