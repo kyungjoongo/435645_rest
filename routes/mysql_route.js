@@ -10,7 +10,7 @@ var striptags = require('striptags');
 var prettyjson = require('prettyjson');
 const mysql = require('nodejs-mysql').default;
 const config = {
-    host: 'localhost',
+    host: '104.155.228.134',
     port: 3306,
     user: 'root',
     password: '1114',
@@ -26,6 +26,10 @@ router.get('/get_receipe', function (req, last_response, next) {
     var table_name = req.query.table_name;
     //var query = req.query.query;
     var offset = (page - 1) * 10 ;
+
+    if (table_name ==undefined){
+        table_name= 'receipe_list'
+    }
 
 
     /*select * from receipe_list  LIMIT 10 offset 0
