@@ -11,6 +11,150 @@ var prettyjson = require('prettyjson');
 
 /*var encodedQuery = querystring.escape('강식당 레시피');*/
 
+//#####################
+
+router.get('/bitfinex/', function (req, last_response, next) {
+
+
+    last_array =[];
+    var bitname = req.params.bitname;
+
+    const request = require('request')
+    request.get('https://api.bitfinex.com/v1/pubticker/btc'+ 'usd', function (error, response, body) {
+
+        var result1 ={}
+
+        result1 = JSON.parse(body);
+        result1.currency = 'btc';
+
+
+        request.get('https://api.bitfinex.com/v1/pubticker/eth' + 'usd', function (error, response, body) {
+
+            var result2 ={}
+
+            result2 = JSON.parse(body);
+            result2.currency = 'eth';
+            result2.korname = '이더리움';
+
+
+            request.get('https://api.bitfinex.com/v1/pubticker/bch' + 'usd', function (error, response, body) {
+
+                var result3 ={}
+
+                result3 = JSON.parse(body);
+                result3.currency = 'bch';
+                result3.korname = '비트코인캐시';
+
+
+                request.get('https://api.bitfinex.com/v1/pubticker/btg' + 'usd', function (error, response, body) {
+
+                    var result4 ={}
+
+                    result4 = JSON.parse(body);
+                    result4.currency = 'btg';
+                    result4.korname = '비트코인골드';
+
+
+                    request.get('https://api.bitfinex.com/v1/pubticker/etc' + 'usd', function (error, response, body) {
+
+                        var result5 ={}
+
+                        result5 = JSON.parse(body);
+                        result5.currency = 'etc';
+                        result5.korname = '이더리움클래식';
+
+
+                        request.get('https://api.bitfinex.com/v1/pubticker/xrp' + 'usd', function (error, response, body) {
+
+                            var result6 ={}
+
+                            result6 = JSON.parse(body);
+                            result6.currency = 'xrp';
+                            result6.korname = '리플';
+
+
+
+                            request.get('https://api.bitfinex.com/v1/pubticker/ltc' + 'usd', function (error, response, body) {
+
+                                let result7 ={}
+
+                                result7 = JSON.parse(body);
+                                result7.currency = 'ltc';
+                                result7.korname = '라이트코인';
+
+
+                                request.get('https://api.bitfinex.com/v1/pubticker/dsh' + 'usd', function (error, response, body) {
+
+                                    let result8 ={}
+
+                                    result8 = JSON.parse(body);
+                                    result8.currency = 'dash';
+                                    result8.korname = '대시';
+
+
+                                    request.get('https://api.bitfinex.com/v1/pubticker/xmr' + 'usd', function (error, response, body) {
+
+                                        let result9 ={}
+
+                                        result9 = JSON.parse(body);
+                                        result9.currency = 'xmr';
+                                        result9.korname = '모네로';
+
+
+                                        request.get('https://api.bitfinex.com/v1/pubticker/qtm' + 'usd', function (error, response, body) {
+
+                                            let result10 ={}
+
+                                            result10 = JSON.parse(body);
+                                            result10.currency = 'qtum';
+                                            result10.korname = '퀀텀';
+
+
+                                            request.get('https://api.bitfinex.com/v1/pubticker/zec' + 'usd', function (error, response, body) {
+
+                                                let result11 ={}
+                                                result11 = JSON.parse(body);
+                                                result11.currency = 'zec';
+                                                result11.korname = '제트캐시';
+
+
+                                                request.get('https://api.bitfinex.com/v1/pubticker/iot' + 'usd', function (error, response, body) {
+
+                                                    let result12 ={}
+                                                    result12 = JSON.parse(body);
+                                                    result12.currency = 'iota';
+                                                    result12.korname = '아이오타';
+
+
+                                                    last_array.push(result1);
+                                                    last_array.push(result2);
+                                                    last_array.push(result3);
+                                                    last_array.push(result4);
+                                                    last_array.push(result5);
+                                                    last_array.push(result6);
+                                                    last_array.push(result7);
+                                                    last_array.push(result8);
+                                                    last_array.push(result9);
+                                                    last_array.push(result10);
+                                                    last_array.push(result11);
+                                                    last_array.push(result12);
+                                                    last_response.json(last_array);
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    })
+
+});
+
+
 router.get('/coinone/:bitname', function (req, last_response, next) {
 
     var final_result_json = [];
@@ -151,8 +295,6 @@ router.get('/bithumb_all_test', function (req, last_response, next) {
     console.log('##############' + cur_time);
 
 
-
-
     var btc = bit_result.BTC
     var bch = bit_result.BCH
     var eth = bit_result.ETH
@@ -163,17 +305,17 @@ router.get('/bithumb_all_test', function (req, last_response, next) {
     var ltc = bit_result.LTC
     var btg = bit_result.BTG
 
-/*
-    btc.trader = 'coinone';
-    bch.trader = 'coinone';
-    eth.trader = 'coinone';
-    etc.trader = 'coinone';
-    xrp.trader = 'coinone';
-    qtum.trader = 'coinone';
-    iota.trader = 'coinone';
-    ltc.trader = 'coinone';
-    btg.trader = 'coinone';*/
-    let final_result_json =[];
+    /*
+        btc.trader = 'coinone';
+        bch.trader = 'coinone';
+        eth.trader = 'coinone';
+        etc.trader = 'coinone';
+        xrp.trader = 'coinone';
+        qtum.trader = 'coinone';
+        iota.trader = 'coinone';
+        ltc.trader = 'coinone';
+        btg.trader = 'coinone';*/
+    let final_result_json = [];
 
     final_result_json.push(btc);
     final_result_json.push(bch);
@@ -339,7 +481,6 @@ function make_bithumb_currency_list() {
     merged_array.push(eos);
 
 
-
     return merged_array;
 
 }
@@ -463,6 +604,7 @@ function make_corbit_currency_list() {
  * 코인원 빗쎔 merge list
  */
 router.get('/coinone_bithumb_list/', function (req, last_response, next) {
+
 
     var final_result_json = [];
     var temp1 = [];

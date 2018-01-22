@@ -8,15 +8,13 @@ var mergeJSON = require("merge-json");
 
 /*requestPromise("http://www.roadrunnersports.com/rrs/mensshoes/mensshoesrunning/?p=96", function (error, response, body) {*/
 
-var str = '혼밥 레시피 모음'
+var str = '집밥 레시피'
 var qs = require('querystring');
 
 var encodedStr = qs.escape(str);
 
 
-var res = syncRequest('get', 'https://search.naver.com/search.naver?date_from=&date_option=0&date_to=&dup_remove=1&nso=&post_blogurl=&post_blogurl_without=' +
-    '&sm=tab_pge&srchby=all&st=sim&where=post&query='+ encodedStr+
-    '&start='+ 11);
+var res = syncRequest('get', 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EC%A7%91%EB%B0%A5+%EB%A0%88%EC%8B%9C%ED%94%BC');
 
 
 

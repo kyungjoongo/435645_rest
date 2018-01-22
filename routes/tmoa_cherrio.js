@@ -16,9 +16,9 @@ var encodedStr = qs.escape(str);
 
 var res = syncRequest('get', 'https://www.torrentmoa.com/index.php?mid=JAV_HD&page=1');
 
+var body = res.getBody();
 
-
-var $ = cheerio.load(res.getBody());
+var $ = cheerio.load(body);
 var blogListJson = [];
 
 
