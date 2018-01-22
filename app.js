@@ -9,9 +9,11 @@ var index = require('./routes/index');
 var bit_route = require('./routes/bit_route');
 var bit_new_route = require('./routes/bit_new_route');
 var users = require('./routes/users');
+var mysql_route = require('./routes/mysql_route');
 var imde_route = require('./routes/imde_route');
 var daum_blog_route = require('./routes/daum_blog_route');
 var ufc_route = require('./routes/ufc_route');
+var naver_route = require('./routes/naver_route');
 var jibbob_route = require('./routes/jibbob_route');
 var cors = require('cors')
 var app = express();
@@ -36,6 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/', users);
 app.use('/', ufc_route);
+app.use('/', mysql_route);
+//naver_route
+app.use('/', naver_route);
 
 app.use('/', imde_route);
 //jibbob_route
