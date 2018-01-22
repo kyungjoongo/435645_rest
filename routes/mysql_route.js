@@ -16,7 +16,8 @@ const config = {
     password: '1114',
     database: 'test'
 }
-const db = mysql.getInstance(config)
+
+const connection = mysql.getInstance(config)
 
 //###############################
 router.get('/get_receipe', function (req, last_response, next) {
@@ -28,16 +29,17 @@ router.get('/get_receipe', function (req, last_response, next) {
 
 
     /*select * from receipe_list  LIMIT 10 offset 0
-
     select * from receipe_list  LIMIT 10 offset 10
-
     select * from receipe_list  LIMIT 10 offset 20*/
 
 
-    db.exec('select * from '+ table_name+ '  LIMIT 10 offset '+ offset).then(rows => {
+    connection.exec('select * from '+ table_name+ '  LIMIT 10 offset '+ offset).then(rows => {
 
         last_response.json(rows)
+
+
     });
+
 
 
 });
