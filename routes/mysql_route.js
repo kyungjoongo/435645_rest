@@ -17,6 +17,8 @@ const config = {
     database: 'test'
 }
 
+
+
 const connection = mysql.getInstance(config)
 
 //###############################
