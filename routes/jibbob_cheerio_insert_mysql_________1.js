@@ -27,9 +27,9 @@ for (var i = 1; i <= 100; i++) {
 
             console.log(index);
 
-            insertCrawlingAndInsertDb('냉장고를 부탁해 레시피', index, 'receipe_list_nb')
+            insertCrawlingAndInsertDb('혼밥 레시피', index, 'receipe_list')
 
-        }, i * 2000);
+        }, i * 1);
     })(i);
 
 
