@@ -18,7 +18,6 @@ const config = {
 }
 
 
-
 const connection = mysql.getInstance(config)
 
 //###############################
@@ -26,26 +25,32 @@ router.get('/get_receipe', function (req, last_response, next) {
 
     var page = req.query.page;
     var table_name = req.query.table_name;
+    var search_word = req.query.search_word
     //var query = req.query.query;
-    var offset = (page - 1) * 10 ;
+    var offset = (page - 1) * 10;
 
-    if (table_name ==undefined){
-        table_name= 'receipe_list'
+
+    if (search_word == undefined) {
+        search_word = ''
     }
 
 
-    /*select * from receipe_list  LIMIT 10 offset 0
-    select * from receipe_list  LIMIT 10 offset 10
-    select * from receipe_list  LIMIT 10 offset 20*/
+    let sql = ''
+    if (search_word != '') {
+
+        /*select * from receipe_list_yoon where title like '%잡채%'  LIMIT 10 offset 10*/
+        sql = 'select * from ' + table_name + '  where title like "%' + search_word + '%"  LIMIT 10 offset ' + offset
+    } else {
+        sql = 'select * from ' + table_name + '  LIMIT 10 offset ' + offset
+    }
 
 
-    connection.exec('select * from '+ table_name+ '  LIMIT 10 offset '+ offset).then(rows => {
+    connection.exec(sql).then(rows => {
 
         last_response.json(rows)
 
 
     });
-
 
 
 });
