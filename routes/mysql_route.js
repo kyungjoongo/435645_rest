@@ -10,7 +10,7 @@ var striptags = require('striptags');
 var prettyjson = require('prettyjson');
 const mysql = require('nodejs-mysql').default;
 const config = {
-    host: '104.155.228.134',
+    host: '35.201.132.249',
     port: 3306,
     user: 'root',
     password: '1114',
