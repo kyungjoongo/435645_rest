@@ -76,77 +76,90 @@ router.get('/kyunggi_bunyang_apt_list', function (req, last_response, next) {
 
 
 
-    var resInBlog = syncRequest('POST', 'http://www.gico.or.kr/supply/parcels/parcels_list.do?bcIdx=87&searchCategory=143&pageNo='+ page);
 
+    var api_url = 'http://www.gico.or.kr/supply/parcels/parcels_list.do?bcIdx=87&searchCategory=143&pageNo=1';
 
-
-    var $ = cheerio.load(resInBlog.getBody());
     var fianlresultJson = new Array()
 
-    /*title_num*/
-
-    var count= '';
-    $('.t_list > tbody > tr').each(function () {
-
-
-        var no = $(this).find('td:nth-child(1)').text();
-        var sort = $(this).find('td:nth-child(2)').text();
-        var title = $(this).find('.t_subject').children().text();
-        var index = $(this).find('.t_subject').children().attr('onclick');
-        var date = $(this).find('td:nth-child(6)').text();
-
-        var doc_ref = $(this).find('.pop-alllist').children().attr('href');
-
-        //doc_ref = 'http://www.gico.or.kr'+ doc_ref;
+    var request = require('request');
+    var options = {
+        url: api_url
+    };
+    request.post(options, function (error, res, body) {
 
 
-        let _tempArr = index.split(',');
-
-        let _tempIndex = _tempArr[0].replace('goView(', '');
-
-        _tempIndex = _tempIndex.substring(1, _tempIndex.length - 1)
+        //console.log('##############'+ body);
 
 
-        var pop_list = [];
-        //pop-list
-        $('#layer' + _tempIndex + ' >  div > div > ul > li ').each(function () {
+        var $ = cheerio.load(body);
 
-            var doc = $(this).children().attr('href');
-            pop_list.push(doc);
 
+        var count = '';
+        $('.t_list > tbody > tr').each(function () {
+
+            var no = $(this).find('td:nth-child(1)').text();
+            var sort = $(this).find('td:nth-child(2)').text();
+            var title = $(this).find('.t_subject').children().text();
+            var index = $(this).find('.t_subject').children().attr('onclick');
+            var date = $(this).find('td:nth-child(6)').text();
+
+            var doc_ref = $(this).find('.pop-alllist').children().attr('href');
+
+            //doc_ref = 'http://www.gico.or.kr'+ doc_ref;
+
+
+            let _tempArr = index.split(',');
+
+            let _tempIndex = _tempArr[0].replace('goView(', '');
+
+            _tempIndex = _tempIndex.substring(1, _tempIndex.length - 1)
+
+
+            var pop_list = [];
+            //pop-list
+            $('#layer' + _tempIndex + ' >  div > div > ul > li ').each(function () {
+
+                var doc = $(this).children().attr('href');
+                pop_list.push(doc);
+
+
+            });
+
+            if (doc_ref != '#') {
+
+                if (doc_ref != undefined) {
+                    pop_list.push(doc_ref);
+                }
+
+            }
+
+
+            var result = {
+                no: no,//번호
+                sort: sort,//구분
+                date: date, //등록일
+                index: _tempIndex, //index
+                pop_list: pop_list,
+                title: title //제목
+            }
+
+
+            fianlresultJson.push(result);
+            /!*console.log('################' + title);*!/
 
         });
 
-        if (doc_ref != '#') {
 
-            if (doc_ref != undefined) {
-                pop_list.push(doc_ref);
-            }
+        console.log(fianlresultJson);
+        console.log("###" + fianlresultJson.length);
 
-        }
+        last_response.json(fianlresultJson)
 
-
-        var result = {
-            no: no,//번호
-            sort: sort,//구분
-            date: date, //등록일
-            index: _tempIndex, //index
-            /*doc_ref: doc_ref,*/
-            pop_list: pop_list,
-            title: title //제목
-        }
-
-
-        fianlresultJson.push(result);
-        /*console.log('################' + title);*/
     });
 
 
-    console.log(fianlresultJson);
-    console.log("###" + fianlresultJson.length);
 
 
-    last_response.json(fianlresultJson)
 
 
 });
