@@ -157,10 +157,6 @@ router.get('/kyunggi_bunyang_apt_list', function (req, last_response, next) {
 
 
 
-
-
-
-
 });
 
 
