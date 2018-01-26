@@ -11,6 +11,7 @@ var prettyjson = require('prettyjson');
 
 
 //###############################
+/*
 
 router.get('/naver_p', function (req, last_response, next) {
 
@@ -31,7 +32,7 @@ async function getRecepie (req, last_response, next,query, pageStart) {
 
 
     const page = await instance.createPage();
-    /*page.settings.l*/
+    /!*page.settings.l*!/
     await page.on('onResourceRequested', function (requestData) {
         console.info('Requesting', requestData.url);
     });
@@ -55,11 +56,11 @@ async function getRecepie (req, last_response, next,query, pageStart) {
             var title = $(this).find('._sp_each_title').attr('title');
             var href = $(this).find('._sp_each_title').attr('href');
 
-            /*
+            /!*
                 https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzA1MTZfMjUx%2F
                     // MDAxNDk0ODYxNTY0NTk3.2Rh3Z3K32gZ4Z8yzW6jMp79vdG3j7Do5NWUQsHfTuYUg.e5
                     // mKgSvA0lxboKa-7r0ibk5N6oIsJHJaTpCCJJQdMGIg.JPEG.witchyoli%2F%25C8%25A5%25B9%25
-                    // E4%25B8%25DE%25B4%25BA%25B8%25F0%25C0%25BD.jpg%23740x740&type=m80_80*/
+                    // E4%25B8%25DE%25B4%25BA%25B8%25F0%25C0%25BD.jpg%23740x740&type=m80_80*!/
 
 
             if (image != undefined) {
@@ -96,6 +97,7 @@ async function getRecepie (req, last_response, next,query, pageStart) {
     await instance.exit();
 }
 
+*/
 
 //########################
 
