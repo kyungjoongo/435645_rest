@@ -75,78 +75,90 @@ router.get('/kyunggi_bunyang_apt_list', function (req, last_response, next) {
     }
 
 
+    var api_url = 'http://www.gico.or.kr/supply/parcels/parcels_list.do?bcIdx=87&searchCategory=143&pageNo='+ page;
 
-    var resInBlog = syncRequest('GET', 'http://www.gico.or.kr/supply/parcels/parcels_list.do?bcIdx=87&searchCategory=143&pageNo='+ page);
-
-
-
-    var $ = cheerio.load(resInBlog.getBody());
     var fianlresultJson = new Array()
 
-    /*title_num*/
 
-    var count= '';
-    $('.t_list > tbody > tr').each(function () {
+    request({
+        url: api_url,
+        method: 'GET'
+    }, function (err, _response, body) {
 
-
-        var no = $(this).find('td:nth-child(1)').text();
-        var sort = $(this).find('td:nth-child(2)').text();
-        var title = $(this).find('.t_subject').children().text();
-        var index = $(this).find('.t_subject').children().attr('onclick');
-        var date = $(this).find('td:nth-child(6)').text();
-
-        var doc_ref = $(this).find('.pop-alllist').children().attr('href');
-
-        //doc_ref = 'http://www.gico.or.kr'+ doc_ref;
+        var $ = cheerio.load(body);
 
 
-        let _tempArr = index.split(',');
+        var count = '';
+        $('.t_list > tbody > tr').each(function () {
 
-        let _tempIndex = _tempArr[0].replace('goView(', '');
+            var no = $(this).find('td:nth-child(1)').text();
+            var sort = $(this).find('td:nth-child(2)').text();
+            var title = $(this).find('.t_subject').children().text();
+            var index = $(this).find('.t_subject').children().attr('onclick');
+            var date = $(this).find('td:nth-child(6)').text();
 
-        _tempIndex = _tempIndex.substring(1, _tempIndex.length - 1)
+            var doc_ref = $(this).find('.pop-alllist').children().attr('href');
 
-
-        var pop_list = [];
-        //pop-list
-        $('#layer' + _tempIndex + ' >  div > div > ul > li ').each(function () {
-
-            var doc = $(this).children().attr('href');
-            pop_list.push(doc);
+            //doc_ref = 'http://www.gico.or.kr'+ doc_ref;
 
 
-        });
+            let _tempArr = index.split(',');
 
-        if (doc_ref != '#') {
+            let _tempIndex = _tempArr[0].replace('goView(', '');
 
-            if (doc_ref != undefined) {
-                pop_list.push(doc_ref);
+            _tempIndex = _tempIndex.substring(1, _tempIndex.length - 1)
+
+
+            var pop_list = [];
+            //pop-list
+            $('#layer' + _tempIndex + ' >  div > div > ul > li ').each(function () {
+
+                var doc = $(this).children().attr('href');
+                pop_list.push(doc);
+
+
+            });
+
+            if (doc_ref != '#') {
+
+                if (doc_ref != undefined) {
+                    pop_list.push(doc_ref);
+                }
+
             }
 
-        }
+
+            var result = {
+                no: no,//번호
+                sort: sort,//구분
+                date: date, //등록일
+                index: _tempIndex, //index
+                /*doc_ref: doc_ref,*/
+                pop_list: pop_list,
+                title: title //제목
+            }
 
 
-        var result = {
-            no: no,//번호
-            sort: sort,//구분
-            date: date, //등록일
-            index: _tempIndex, //index
-            /*doc_ref: doc_ref,*/
-            pop_list: pop_list,
-            title: title //제목
-        }
+            fianlresultJson.push(result);
 
 
-        fianlresultJson.push(result);
-        /*console.log('################' + title);*/
+        });//eachEnd
+
+        console.log(fianlresultJson);
+        console.log("###" + fianlresultJson.length);
+
+        last_response.json(fianlresultJson)
+
+
+
+
     });
 
 
-    console.log(fianlresultJson);
-    console.log("###" + fianlresultJson.length);
 
 
-    last_response.json(fianlresultJson)
+
+
 
 
 });
