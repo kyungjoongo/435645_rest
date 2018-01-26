@@ -79,10 +79,9 @@ router.get('/kyunggi_bunyang_apt_list', function (req, last_response, next) {
 
     var fianlresultJson = new Array()
 
-
     request({
         url: api_url,
-        method: 'GET'
+        method: 'POST'
     }, function (err, _response, body) {
 
         var $ = cheerio.load(body);
