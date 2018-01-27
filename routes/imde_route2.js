@@ -14,6 +14,11 @@ var prettyjson = require('prettyjson');
 router.get('/kyunggi_bunyang_apt_list_detail', function (req, last_response, next) {
 
 
+});
+
+router.get('/kyunggi_bunyang_apt_list_detail', function (req, last_response, next) {
+
+
     var index = '';
 
     if ( req.query.index == undefined){

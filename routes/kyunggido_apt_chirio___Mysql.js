@@ -61,20 +61,28 @@ function get_and_insert_kyunggido_apt_bunyang_list(page) {
         $('#layer' + _tempIndex + ' >  div > div > ul > li ').each(function () {
 
             var doc = $(this).children().attr('href');
+
+            var __temp = doc.split("=");
+            doc = __temp[1];
             pop_list.push(doc);
 
 
         });
 
-        if (doc_ref != '#') {
+        if (doc_ref != '#' && doc_ref != undefined) {
+
+
+            var __temp = doc_ref.split("=");
+            doc_ref = __temp[1];
 
             if (doc_ref != undefined) {
                 pop_list.push(doc_ref);
             }
 
+
         }
 
-        pop_list =  SqlString.escape(pop_list);
+        pop_list =  encodeURI(pop_list);
 
         var result = {
             no: no,//번호

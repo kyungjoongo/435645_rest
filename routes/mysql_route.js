@@ -10,7 +10,8 @@ var striptags = require('striptags');
 var prettyjson = require('prettyjson');
 const mysql = require('nodejs-mysql').default;
 const config = {
-    host: '35.201.132.249',
+    //host: '35.201.132.249',
+    host: 'localhost',
     port: 3306,
     user: 'root',
     password: '1114',
@@ -19,6 +20,27 @@ const config = {
 
 
 const connection = mysql.getInstance(config)
+
+router.get('/get_kyunggido_apt_list', function (req, last_response, next) {
+
+
+    var page = req.query.page;
+    var table_name = 'kyunggido_apt_bunyang'
+    var offset = (page - 1) * 10;
+
+
+    let sql = ''
+
+    sql = 'select * from ' + table_name + '  LIMIT 10 offset ' + offset
+
+
+    connection.exec(sql).then(rows => {
+
+        last_response.json(rows)
+
+    });
+});
+
 
 //###############################
 router.get('/get_receipe', function (req, last_response, next) {
