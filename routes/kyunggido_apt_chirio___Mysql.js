@@ -67,6 +67,9 @@ function get_and_insert_kyunggido_apt_bunyang_list(page) {
             pop_list.push(doc);
 
 
+
+
+
         });
 
         if (doc_ref != '#' && doc_ref != undefined) {
