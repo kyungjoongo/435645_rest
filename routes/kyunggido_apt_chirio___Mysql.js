@@ -85,7 +85,7 @@ function get_and_insert_kyunggido_apt_bunyang_list(page) {
 
         }
 
-        pop_list =  encodeURI(pop_list);
+        pop_list =  encodeURI(pop_list.toString());
 
         var result = {
             no: no,//번호

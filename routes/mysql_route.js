@@ -17,21 +17,48 @@ const config = {
     password: '1114',
     database: 'test'
 }
-
-
 const connection = mysql.getInstance(config)
+
+
+router.get('/get_humor', function (req, last_response, next) {
+
+
+    var page = req.query.page;
+
+    if ( page ==undefined){
+        page =1;
+    }
+
+    var table_name = 'humor001'
+    var offset = (page - 1) * 20;
+
+
+    let sql = ''
+
+    sql = 'select * from ' + table_name + '  LIMIT 20 offset ' + offset
+
+
+    connection.exec(sql).then(rows => {
+
+        last_response.json(rows)
+
+    });
+});
+
+
+
 
 router.get('/get_kyunggido_apt_list', function (req, last_response, next) {
 
 
     var page = req.query.page;
     var table_name = 'kyunggido_apt_bunyang'
-    var offset = (page - 1) * 10;
+    var offset = (page - 1) * 20;
 
 
     let sql = ''
 
-    sql = 'select * from ' + table_name + '  LIMIT 10 offset ' + offset
+    sql = 'select * from ' + table_name + '  LIMIT 20 offset ' + offset
 
 
     connection.exec(sql).then(rows => {
