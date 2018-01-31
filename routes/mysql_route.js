@@ -35,7 +35,7 @@ router.get('/get_humor', function (req, last_response, next) {
 
     let sql = ''
 
-    sql = 'select * from ' + table_name + '  LIMIT 20 offset ' + offset
+    sql = 'select * from ' + table_name + ' order by id desc  LIMIT 20 offset ' + offset
 
 
     connection.exec(sql).then(rows => {
