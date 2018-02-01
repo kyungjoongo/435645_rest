@@ -12,6 +12,36 @@ var prettyjson = require('prettyjson');
 /*var encodedQuery = querystring.escape('강식당 레시피');*/
 
 
+router.get('/naver_blog_v3/', function (req, last_res, next) {
+
+    var page = req.query.page;
+    var query = req.query.query
+    var encodedQuery = querystring.escape(query);
+
+    request({
+        headers: {
+            'Authorization': 'KakaoAK 28449fe1535e7f4f2d0d605b5a1af7a6'
+            , 'Content-Type': 'application/json;charset=UTF-8'
+        },
+        encoding: null,
+        uri: 'https://dapi.kakao.com/v2/search/blog?query=' + encodedQuery + '&page=' + page + '&size=10',
+        method: 'GET'
+    }, function (err, res, body) {
+
+
+        var jsonArray = JSON.parse(body);
+        let dataJson = jsonArray.documents;
+        last_res.json(dataJson);
+
+    });
+
+
+
+});
+
+
+
+
 router.get('/naver_blog_v2/', function (req, last_res, next) {
 
     var page = req.query.page;
