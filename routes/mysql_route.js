@@ -105,4 +105,39 @@ router.get('/get_receipe', function (req, last_response, next) {
 });
 
 
+router.get('/get_naver_search', function (req, last_response, next) {
+
+    var page = req.query.page;
+    var table_name = req.query.table_name;
+    var search_word = req.query.search_word
+    //var query = req.query.query;
+    var offset = (page - 1) * 10;
+
+
+    if (search_word == undefined) {
+        search_word = ''
+    }
+
+
+    let sql = ''
+    if (search_word != '') {
+
+        /*select * from receipe_list_yoon where title like '%잡채%'  LIMIT 10 offset 10*/
+        sql = 'select * from ' + table_name + '  where title like "%' + search_word + '%"  LIMIT 10 offset ' + offset
+    } else {
+        sql = 'select * from ' + table_name + '  LIMIT 10 offset ' + offset
+    }
+
+
+    connection.exec(sql).then(rows => {
+
+        last_response.json(rows)
+
+
+    });
+
+
+});
+
+
 module.exports = router;

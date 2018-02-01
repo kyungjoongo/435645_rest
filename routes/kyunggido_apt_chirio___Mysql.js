@@ -8,7 +8,8 @@ var mergeJSON = require("merge-json");
 var SqlString = require('sqlstring');
 const mysql = require('nodejs-mysql').default;
 const config = {
-    host: 'localhost',
+    //host: 'localhost',
+    host: '35.201.132.249',
     port: 3306,
     user: 'root',
     password: '1114',
