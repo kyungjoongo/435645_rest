@@ -1,0 +1,7 @@
+GET https://dapi.kakao.com/v2/search/cafe --Authorization: KakaoAK  06fecaac3640a3f4649087b09c32c360
+?query=아이유
+Content-Type: application/json
+
+
+
+###

@@ -34,15 +34,14 @@ async function insertHumorToMysql() {
     });
 
 
-    /*for (let i = 1; i < 500; i++) {*/
+    for (let i = 1; i < 5; i++) {
 
-    console.log('#######curpage #######' + 1);
+        console.log('#######curpage #######' + 1);
 
-    //  page.settings.resourceTimeout = 600000; //
+        //  page.settings.resourceTimeout = 600000; //
 
-    await insertDate(1, page);
-    //}
-
+        await insertDate(i, page);
+    }
 
     //return result;
 

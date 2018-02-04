@@ -12,7 +12,9 @@ var replaceall = require("replaceall");
 var queryString = require('querystring');
 const mysql = require('nodejs-mysql').default;
 const config = {
-    host: 'localhost',
+    //host: 'localhost',
+    //35.201.132.249
+    host: '35.201.132.249',
     port: 3306,
     user: 'root',
     password: '1114',
@@ -20,16 +22,16 @@ const config = {
 }
 const db = mysql.getInstance(config)
 
-for (var i = 1; i <= 100; i++) {
+for (var i = 1; i <= 150; i++) {
 
     (function (index) {
         setTimeout(function () {
 
             console.log(index);
 
-            insertCrawlingAndInsertDb('혼밥 레시피', index, 'receipe_list')
+            insertCrawlingAndInsertDb('강식당 레시피', index, 'receipe_list')
 
-        }, i * 1);
+        }, i * 1000);
     })(i);
 
 
@@ -44,9 +46,14 @@ function insertCrawlingAndInsertDb(query, page, tableName) {
 
     var pageStart = (page - 1) * 10 + 1;
 
-    var res = syncRequest('get', 'https://search.naver.com/search.naver?date_from=&date_option=0&date_to=&dup_remove=1&nso=&post_blogurl=&post_blogurl_without=' +
-        '&sm=tab_pge&srchby=all&st=sim&where=post&query=' + queryString.escape(query) +
-        '&start=' + pageStart);
+    var uri2= 'https://search.naver.com/search.naver?' +
+        'where=post&st=date&sm=tab_opt&date_from=&date_to=&' +
+        'date_option=0&srchby=all&dup_remove=1&post_blogurl=' +
+        '&post_blogurl_without=%27%20%20%20%27&nso=so%3Add%2Ca%3Aall%2Cp%3Aall&mson=0&query='+ queryString.escape(query) +'&start=' + pageStart;
+
+
+
+    var res = syncRequest('get', uri2);
 
 
     var $ = cheerio.load(res.getBody());
