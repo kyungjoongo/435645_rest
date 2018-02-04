@@ -7,9 +7,13 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var bit_route = require('./routes/bit_route');
+var route_proverb = require('./routes/route_proverb');
 var bit_new_route = require('./routes/bit_new_route');
 var users = require('./routes/users');
 var mysql_route = require('./routes/mysql_route');
+
+var memcard_route = require('./routes/memcard_route');
+
 var imde_route = require('./routes/imde_route');
 var imde_route2 = require('./routes/imde_route2');
 var daum_blog_route = require('./routes/daum_blog_route');
@@ -39,7 +43,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/', users);
 app.use('/', ufc_route);
+app.use('/', memcard_route);
 app.use('/', mysql_route);
+//route_proverb
+app.use('/', route_proverb);
 //naver_route
 app.use('/', naver_route);
 
