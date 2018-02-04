@@ -9,9 +9,42 @@ var querystring = require('querystring');
 var striptags = require('striptags');
 var prettyjson = require('prettyjson');
 
-/*var encodedQuery = querystring.escape('강식당 레시피');*/
 
-//#####################
+router.get('/memcard_detail/', function (req, last_response, next) {
+
+    var idx = req.query.idx;
+
+    var res = syncRequest('post', 'http://mecard.sonokong.co.kr/Card/CardView?crd_idx='+ idx);
+
+
+    var $ = cheerio.load(res.getBody());
+
+    var blogListJson = new Array()
+
+    var count = '';
+    $('.card_info  >dl > dd ').each(function () {
+
+        var content = $(this).children().text()
+
+        let content_key_value = content.split(":");
+
+
+        blogListJson.push({
+
+            key : content_key_value[0],
+            value : content_key_value[1]
+
+        })
+
+    });
+
+
+    last_response.json(blogListJson)
+
+});
+
+
+
 
 router.get('/memcard/', function (req, last_response, next) {
 
