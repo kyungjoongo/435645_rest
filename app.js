@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
+
 
 var index = require('./routes/index');
 var bit_route = require('./routes/bit_route');
@@ -11,6 +13,9 @@ var route_proverb = require('./routes/route_proverb');
 var bit_new_route = require('./routes/bit_new_route');
 var users = require('./routes/users');
 var mysql_route = require('./routes/mysql_route');
+
+//route_face_reconize
+var route_face_reconize = require('./routes/route_face_reconize');
 
 var memcard_route = require('./routes/memcard_route');
 
@@ -21,6 +26,7 @@ var ufc_route = require('./routes/ufc_route');
 var naver_route = require('./routes/naver_route');
 var jibbob_route = require('./routes/jibbob_route');
 var cors = require('cors')
+
 var app = express();
 
 
@@ -31,6 +37,7 @@ app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(fileUpload());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
@@ -45,6 +52,8 @@ app.use('/', users);
 app.use('/', ufc_route);
 app.use('/', memcard_route);
 app.use('/', mysql_route);
+//route_face_reconize
+app.use('/', route_face_reconize);
 //route_proverb
 app.use('/', route_proverb);
 //naver_route
