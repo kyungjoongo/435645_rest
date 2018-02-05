@@ -11,7 +11,7 @@ var prettyjson = require('prettyjson');
 const mysql = require('nodejs-mysql').default;
 const config = {
     //host: '35.201.132.249',
-    host: 'localhost',
+    host: '35.201.132.249',
     port: 3306,
     user: 'root',
     password: '1114',
