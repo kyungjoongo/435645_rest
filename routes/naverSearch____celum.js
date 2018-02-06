@@ -8,12 +8,10 @@ var mergeJSON = require("merge-json");
 
 
 var querystring = require('querystring');
-var encodedQuery = querystring.escape('임대주택 청약 정보');
-//var api_url = 'https://openapi.naver.com/v1/search/blog?query='+ encodedQuery; // json 결과
+var query= '공유';
 
 
-
-var api_url = 'https://openapi.naver.com/v1/search/image?display=10&start='+pageStart + '&sort=sim&query='+ encodeURI(query); // json 결과
+var api_url = 'https://openapi.naver.com/v1/search/image?display=10&start=1'+ '&sort=sim&query='+ encodeURI(query); // json 결과
 var striptags = require('striptags');
 var prettyjson = require('prettyjson');
 

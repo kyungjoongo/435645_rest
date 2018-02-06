@@ -19,7 +19,7 @@ router.get('/naver_image_search', function (req, last_response, next) {
 
     var pageStart = (page - 1) * 10 + 1;
 
-    var api_url = 'https://openapi.naver.com/v1/search/image?display=10&start='+pageStart + '&sort=sim&query='+ encodeURI(query); // json 결과
+    var api_url = 'https://openapi.naver.com/v1/search/image?display=10&start=1' + '&sort=sim&query='+ encodeURI(query); // json 결과
 
 
     request({

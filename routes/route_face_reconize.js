@@ -68,5 +68,48 @@ router.post('/face_upload/', function (req, last_response, next) {
     });
 });
 
+//##############################################
+
+router.post('/naver_image_search2/', function (req, last_response, next) {
+
+    var query = req.query.query;
+
+    var api_url = 'https://openapi.naver.com/v1/search/image?display=10&start=1'+ '&sort=sim&query='+ encodeURI(query); // json 결과
+    var striptags = require('striptags');
+    var prettyjson = require('prettyjson');
+
+
+    request({
+        url: api_url,
+        headers: {'X-Naver-Client-Id': 'e8G6hWbcN1XdeCN9DIgQ', 'X-Naver-Client-Secret': 'wCcRnTYrhN'},
+        method: 'GET'
+    }, function (err, _response, body) {
+        //it works!
+
+        var blogArrray= JSON.parse(body);
+
+
+        for ( var i=0; i<blogArrray.items.length;i++){
+
+
+            console.log('##############'+ striptags(blogArrray.items[i].title))
+
+            var title= striptags(blogArrray.items[i].title);
+
+            var link = blogArrray.items[i].link.replace('&amp;', '&')
+
+
+            blogArrray.items[i].title = title;
+            blogArrray.items[i].link = link;
+
+        }
+
+
+        console.log(prettyjson.render(blogArrray.items ,{noColor: true}));
+        last_response.json(blogArrray.items)
+    });
+});
+
+
 
 module.exports = router;
