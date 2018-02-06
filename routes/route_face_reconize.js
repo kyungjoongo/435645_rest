@@ -25,7 +25,7 @@ router.post('/face_upload/', function (req, last_response, next) {
     let name = req.files.file.name;
 
     // let baseUrl = 'e:/upload/'
-    let baseUrl = './upload/'
+    let baseUrl = './'
     let fixedName = 'temp_image.jpg'
 
     console.log('##############' + name);
